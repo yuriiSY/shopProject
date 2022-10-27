@@ -80,7 +80,11 @@
                     <br>
                     <p>
                     <#if user.id??>
-                        <button class="btn btn-round btn-success" type="button" onclick="window.location.href = '/product/${product.id}/cart'"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                    <form action="/product/${product.id}/cart" method="post">
+<#--                        <button class="btn btn-round btn-success" type="button" onclick="window.location.href = '/product/${product.id}/cart'"><i class="fa fa-shopping-cart"></i> Add to Cart</button>-->
+                        <button type="submit" class="btn btn-round btn-success m-3">Add to Cart</button>
+                        <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                    </form>
                         <#if product.user.id == user.id || user.isAdmin()>
                         <button class="btn btn-round btn-primary" type="button" onclick="window.location.href = '/product/${product.id}/update'"><i class="fa fa-shopping-cart"></i>Edit</button>
                     <form action="/product/${product.id}/delete" method="post">

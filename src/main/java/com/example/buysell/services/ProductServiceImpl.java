@@ -139,6 +139,6 @@ public class ProductServiceImpl implements ProductService {
         } else {
             cartService.addProduct(cart,Collections.singletonList(productId));
         }
-        log.info(" Product with ID: {} was added to Cart:{};", productId,cart.getId());
+        log.info(" Product with ID: {} was added to Cart", productId);
     }
 }

@@ -23,12 +23,10 @@ import java.util.Map;
 @Controller
 public class ProductController {
     private final ProductServiceImpl productService;
-
     @Autowired
     public ProductController(ProductServiceImpl productService) {
         this.productService = productService;
     }
-
     @GetMapping("/")
     public String products(@RequestParam(name = "title", required = false) String title,
                            Principal principal,
@@ -66,8 +64,6 @@ public class ProductController {
         return "products";
     }
 
-
-
     @GetMapping("/product/{id}")
     public String productInfo(@PathVariable Long id, Model model,Principal principal) {
         Product product = productService.getProductById(id);
@@ -77,11 +73,9 @@ public class ProductController {
         return "product-info";
     }
 
-
-
     @PostMapping("/product/create")
     public String createProduct(@RequestParam("file1") MultipartFile file1, @RequestParam("file2") MultipartFile file2,
-                                @RequestParam("file3") MultipartFile file3,  @Valid Product product, BindingResult bindingResult,Model model, Principal principal,@PageableDefault(sort ={"id"},direction = Sort.Direction.DESC) Pageable pageable) throws IOException {
+                                @RequestParam("file3") MultipartFile file3,  @Valid Product product, BindingResult bindingResult, Model model, Principal principal,@PageableDefault(sort ={"id"},direction = Sort.Direction.DESC) Pageable pageable) throws IOException {
 
         Map<String,String> errorsMap = ControllersUtils.getErrors(bindingResult);
         model.addAttribute("user", productService.getUserByPrincipal(principal));
@@ -106,7 +100,7 @@ public class ProductController {
         return "redirect:/";
     }
 
-    @GetMapping("/product/{id}/cart")
+    @PostMapping("/product/{id}/cart")
     public String addProductToCart(@PathVariable Long id, Principal principal) {
         if(principal==null) {
             return "redirect:/";
