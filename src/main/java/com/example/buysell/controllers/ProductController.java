@@ -34,12 +34,10 @@ public class ProductController {
                            Principal principal,
                            Model model,
                            @PageableDefault(sort ={"id"},direction = Sort.Direction.DESC) Pageable pageable) {
-        System.out.println(title);
         Page<Product> products = productService.listProducts(title,pageable);
         model.addAttribute("products", products);
         model.addAttribute("URL","/" );
         model.addAttribute("user", productService.getUserByPrincipal(principal));
-
         return "products";
     }
     @GetMapping("/price-asc")
