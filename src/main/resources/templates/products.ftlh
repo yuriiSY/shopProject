@@ -53,7 +53,7 @@
 <div class="accordion" id="accordionExample">
     <div class="accordion-item">
         <h2 class="accordion-header" id="headingOne">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                 Add Product
             </button>
         </h2>
@@ -93,12 +93,12 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Price</label>
-                        <input type="number" name="price" class="form-control" id="exampleFormControlInput1" placeholder="20000">
+                        <input type="number" required name="price" class="form-control" id="exampleFormControlInput1" placeholder="20000">
                     </div>
 
                     <div class="form-group">
                         <label for="exampleFormControlFile1">Main Photo</label><br>
-                        <input type="file" name="file1" class="form-control-file" id="exampleFormControlFile1">
+                        <input type="file" required name="file1" class="form-control-file" id="exampleFormControlFile1">
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlFile1">Photo</label><br>

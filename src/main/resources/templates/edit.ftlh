@@ -47,11 +47,11 @@
             </div>
             <div class="form-group">
                 <label for="exampleFormControlInput1">Price</label>
-                <input type="number" name="price" class="form-control" id="exampleFormControlInput1" placeholder="20000">
+                <input type="number" required name="price" class="form-control" id="exampleFormControlInput1" placeholder="20000">
             </div>
             <div class="form-group">
                 <label for="exampleFormControlFile1">Photo</label><br>
-                <input type="file" name="file1" class="form-control-file" id="exampleFormControlFile1">
+                <input type="file" required name="file1" class="form-control-file" id="exampleFormControlFile1">
             </div>
             <div class="form-group">
                 <label for="exampleFormControlFile1">Photo</label><br>
