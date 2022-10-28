@@ -2,6 +2,8 @@ package com.example.buysell.models;
 
 import com.example.buysell.models.enums.Role;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +17,8 @@ import java.util.*;
 
 @Entity
 @Table(name = "users")
-@Data
+@Setter
+@Getter
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

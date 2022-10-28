@@ -3,6 +3,8 @@ package com.example.buysell.controllers;
 import com.example.buysell.models.Product;
 
 import com.example.buysell.services.ProductServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,6 +25,8 @@ import java.util.Map;
 @Controller
 public class ProductController {
     private final ProductServiceImpl productService;
+
+    Logger logger = LoggerFactory.getLogger(ProductController.class);
     @Autowired
     public ProductController(ProductServiceImpl productService) {
         this.productService = productService;
@@ -36,6 +40,7 @@ public class ProductController {
         model.addAttribute("products", products);
         model.addAttribute("URL","/" );
         model.addAttribute("user", productService.getUserByPrincipal(principal));
+        logger.info("Opened page with products");
         return "products";
     }
     @GetMapping("/price-asc")
@@ -48,7 +53,7 @@ public class ProductController {
         model.addAttribute("products", products);
         model.addAttribute("URL","/" );
         model.addAttribute("user", productService.getUserByPrincipal(principal));
-
+        logger.info("products are sorted from a-z");
         return "products";
     }
     @GetMapping("/price-desc")
@@ -60,7 +65,7 @@ public class ProductController {
         model.addAttribute("products", products);
         model.addAttribute("URL","/" );
         model.addAttribute("user", productService.getUserByPrincipal(principal));
-
+        logger.info("products are sorted from z-a");
         return "products";
     }
 
@@ -70,6 +75,7 @@ public class ProductController {
         model.addAttribute("product", product);
         model.addAttribute("images", product.getImages());
         model.addAttribute("user", productService.getUserByPrincipal(principal));
+        logger.info("product information");
         return "product-info";
     }
 
@@ -97,6 +103,7 @@ public class ProductController {
 
         model.addAttribute("product", product);
         productService.saveOrUpdateProduct(principal, product, file1, file2, file3);
+        logger.info("new product created");
         return "redirect:/";
     }
 
@@ -106,6 +113,7 @@ public class ProductController {
             return "redirect:/";
         }
         productService.addToUserCart(id,principal);
+        logger.info("product added to cart");
         return "redirect:/";
     }
 
@@ -115,6 +123,7 @@ public class ProductController {
             return "redirect:/";
         }
         productService.delProductById(id);
+        logger.info("product removed by Id");
         return "redirect:/";
     }
 
@@ -128,6 +137,7 @@ public class ProductController {
         model.addAttribute("title", title);
         model.addAttribute("URL","/search" );
         model.addAttribute("user", productService.getUserByPrincipal(principal));
+        logger.info("product search");
         return "search";
     }
 
@@ -137,6 +147,7 @@ public class ProductController {
         model.addAttribute("product", product);
         model.addAttribute("user", productService.getUserByPrincipal(principal));
         model.addAttribute("photoMain",product.getPreviewImageId());
+        logger.info("product edit page opened");
         return "edit";
     }
     @Transactional
@@ -144,6 +155,7 @@ public class ProductController {
     public String updateProduct(@RequestParam("productId") Long productId,@RequestParam("file1") MultipartFile file1, @RequestParam("file2") MultipartFile file2, @RequestParam("file3") MultipartFile file3, Product product, Principal principal) throws IOException {
         Product existProduct = productService.getProductById(productId);
         productService.update(existProduct,product,file1,file2,file3);
+        logger.info("Product has been updated");
         return "redirect:/";
     }
 }

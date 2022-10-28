@@ -3,6 +3,8 @@ package com.example.buysell.controllers;
 import com.example.buysell.dto.CartDTO;
 import com.example.buysell.services.CartServiceImpl;
 import com.example.buysell.services.OrderServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,7 @@ public class CartController {
     private final CartServiceImpl cartService;
     private final OrderServiceImpl orderService;
 
+    Logger logger = LoggerFactory.getLogger(CartController.class);
     @Autowired
     public CartController(CartServiceImpl cartService, OrderServiceImpl orderService) {
         this.cartService = cartService;
@@ -31,6 +34,7 @@ public class CartController {
             CartDTO cartDTO = cartService.getCartByUser(principal.getName());
             model.addAttribute( "cart",cartDTO);
         }
+        logger.info("cart page has been opened");
         return "cart";
     }
 
@@ -40,19 +44,21 @@ public class CartController {
             return "redirect:/";
         }
         orderService.createOrderFromCart(principal);
-
+        logger.info("new order created");
         return "redirect:/";
     }
 
     @GetMapping("/cart/delete/{id}")
     public String delProductFromCart(@PathVariable("id") Long productId,Principal principal) {
         cartService.deleteProduct(productId,principal.getName());
+        logger.info("the product has been removed from the cart");
         return "redirect:/cart";
     }
 
     @PostMapping("/cart/clear")
     public String clearCart(Principal principal) {
         cartService.clearCart(principal.getName());
+        logger.info("shopping cart empty");
         return "redirect:/";
     }
 
