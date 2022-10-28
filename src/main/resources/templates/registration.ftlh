@@ -19,7 +19,7 @@
                     <div class="card" style="border-radius: 15px;">
                         <div class="card-body p-5">
                             <h2 class="text-uppercase text-center mb-5">Create an account</h2>
-                            <form action="/registration" method="post">
+                            <form action="/registration" method="post" >
                                 <div class="form-outline mb-4">
                                     <input type="text" id="form3Example1cg"  <#if nameError??>value="${user.name}"</#if> class="form-control form-control-lg ${(nameError??)?string('is-invalid', '')}" name="name" />
                                     <label class="form-label" for="form3Example1cg">Your Name</label>
@@ -58,8 +58,8 @@
                                 </div>
 
                                 <div class="d-flex justify-content-center">
-                                    <input type="hidden" name="_csrf" value="${_csrf.token}">
                                     <button class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" type="submit">Register</button>
+                                    <input type="hidden" name="_csrf" value="${_csrf.token}">
                                 </div>
 
                                 <#if errorMessage??>
