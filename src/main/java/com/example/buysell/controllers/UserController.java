@@ -2,6 +2,8 @@ package com.example.buysell.controllers;
 
 import com.example.buysell.models.User;
 import com.example.buysell.services.UserServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,8 @@ import java.util.Map;
 public class UserController {
     private final UserServiceImpl userService;
 
+    Logger logger = LoggerFactory.getLogger(UserController.class);
+
     @Autowired
     public UserController(UserServiceImpl userService) {
         this.userService = userService;
@@ -24,11 +28,13 @@ public class UserController {
 
     @GetMapping("/login")
     public String login() {
+        logger.info("login page opened");
         return "login";
     }
 
     @GetMapping("/registration")
     public String registration() {
+        logger.info("registration page opened");
         return "registration";
     }
 
@@ -60,6 +66,7 @@ public class UserController {
             model.addAttribute("errorMessage", "EMAIL: " + user.getEmail() + " already exist.");
             return "registration";
         }
+        logger.info("new user has been created");
         return "redirect:/login";
     }
 
@@ -67,6 +74,7 @@ public class UserController {
     public String userInfo(@PathVariable("user") User user, Model model) {
         model.addAttribute("user", user);
         model.addAttribute("products", user.getProducts());
+        logger.info("new user has been created");
         return "user-info";
     }
 }
