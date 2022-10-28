@@ -81,7 +81,6 @@
                     <p>
                     <#if user.id??>
                     <form action="/product/${product.id}/cart" method="post">
-<#--                        <button class="btn btn-round btn-success" type="button" onclick="window.location.href = '/product/${product.id}/cart'"><i class="fa fa-shopping-cart"></i> Add to Cart</button>-->
                         <button type="submit" class="btn btn-round btn-success m-3">Add to Cart</button>
                         <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                     </form>
