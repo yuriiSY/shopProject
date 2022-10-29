@@ -46,7 +46,7 @@
             <th><#list order.products as product>${product.title}<br>price:${product.price}<br></#list></th>
             <th>${order.totalPrice}</th>
             <th><a href="/orders-info/${user.id}/delete/${order.id}">cancel</a></th>
-            <#if user.isAdmin()>
+            <#if userIs.isAdmin()>
                 <th>
                     <form action="/orders-info/admin/${user.id}/update-status/${order.id}" method="post">
                         <input type="hidden" name="_csrf" value="${_csrf.token}">
